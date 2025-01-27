@@ -24,24 +24,20 @@ class RandomQuotesApp {
     }
   }
 
-  getRandomQuote() {
+  randomQuoteHandler() {
     this.changeCurrentQuote(RandomQuote.getRandomQuote());
   }
 
-  // getRandomQuoteViaAPI() {
-  //   RandomQuote.getRandomQuoteViaAPI().then((quote) =>
-  //     this.changeCurrentQuote(quote)
-  //   );
-  // }
-
-  async getRandomQuoteViaAPI() {
+  async randomQuoteViaAPIHandler() {
     this.changeCurrentQuote(await RandomQuote.getRandomQuoteViaAPI());
   }
 
   init() {
-    this.randomQuoteBtn.addEventListener("click", () => this.getRandomQuote());
+    this.randomQuoteBtn.addEventListener("click", () =>
+      this.randomQuoteHandler()
+    );
     this.randomQuoteAPIBtn.addEventListener("click", () =>
-      this.getRandomQuoteViaAPI()
+      this.randomQuoteViaAPIHandler()
     );
   }
 }
