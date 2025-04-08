@@ -10,13 +10,17 @@ class RandomQuote {
   }
 
   static async getRandomQuoteViaAPI() {
-    const url = "https://api.agify.io/?name=meelad";
+    const url = "http://api.quotable.io/quotes/random";
     const options = { headers: { "Content-Type": "application/json" } };
     try {
       const response = await fetch(url, options);
-      const { count: id, name: content, age: author } = await response.json();
-      // resolves promise to Quote (promise becoes "fulfilled")
-      return new Quote(id, content, author);
+      const quotes = await response.json();
+      if (Array.isArray(quotes) && quotes.length === 1) {
+        const quote = quotes[0];
+        const { _id: id, content, author } = quote;
+        // resolves promise to Quote (promise becoes "fulfilled")
+        return new Quote(id, content, author);
+      }
     } catch (error) {
       console.error(error);
     }
